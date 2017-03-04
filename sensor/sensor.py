@@ -1,5 +1,7 @@
 from scapy.all import *
 
+# The script must be run as root to access the wireless interface
+
 class UnicornSensor():
 
     IFACE = 'wlan1' # Interface we are capturing packets on, must be in monitor mode!!!
