@@ -1,6 +1,0 @@
-<html>
- <head>
-	<title> Monitor one </title>
-</head>
-<body>
-<h1>Monitor one</h1>
