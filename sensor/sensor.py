@@ -4,9 +4,11 @@ from scapy.all import sniff
 from scapy.all import Packet
 from scapy.layers.dot11 import Dot11
 import time
-
+import os
 from config import Config
 from config import remove_new_line
+import json
+
 
 class UnicornSensor():
 
@@ -52,16 +54,22 @@ class UnicornSensor():
     def event_HeardProbe(self, mac):
         print("HeardProbe from: " + str(mac))
         self.devices[str(mac)] = str(time.time())
+        self.devices[mac] = {'time': time.time(), 'associated': None, 'sensor_id': "1", 'ap': 0}
+        
+        print(devices)
+
         if str(mac) in self.blacklist:
             print("Blacklisted MAC address", str(mac), "detected!")
 
     def event_AccessPointHeard(self, mac):
-        print("AccessPoint heard: " + str(mac))
+        # print("AccessPoint heard: " + str(mac))
+        self.devices[mac] = {'time': time.time(), 'associated': None, 'sensor_id': "1", 'ap': 1}
         if mac not in self.ap_list:
             self.ap_list.append(mac)
 
     def event_HeardAssociation(self, mac1, mac2):
-        print(str(mac2), "attempting to associate with", str(mac1))
+        # print(str(mac2), "attempting to associate with", str(mac1))
+        self.devices[mac1] = {'time': time.time(), 'associated': mac2, 'sensor_id': "1", 'ap': 0}
 
 def main():
     print("Hello World! We come in peace, bringing Soylent...")
