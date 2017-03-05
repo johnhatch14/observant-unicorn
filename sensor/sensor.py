@@ -16,15 +16,19 @@ class UnicornSensor():
     def packetHandler(self, rawpacket: Packet):
         # Prints all packets captured
         if rawpacket.haslayer(Dot11):
-            pktFields = rawpacket.payload.fields
+            pkt_fields = rawpacket.payload.fields
+            #print(pkt_fields)
+            if pkt_fields['type'] == 0 and pkt_fields['subtype'] == 4: # Probe Request
+                self.event_HeardProbe(pkt_fields['addr2'])
 
-            if pktFields.type == 0 and pktFields.subtype == 8: # Beacon
-                print(pktFields.addr)
+            if pkt_fields['type'] == 0 and pkt_fields['subtype'] == 8:  # Beacon
+                self.event_AccessPointHeard(pkt_fields['addr2'])
 
     def event_HeardProbe(self, mac):
+        print("HeardProbe from:" + str(mac))
 
-    def event_AccessPointHeard(self, station):
-
+    def event_AccessPointHeard(self, mac):
+        print("AccessPoint heard:" + str(mac))
 
 def main():
     print("Hello World! We come in peace, bringing Soylent...")
