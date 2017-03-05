@@ -3,9 +3,9 @@
 from scapy.all import sniff
 from scapy.all import Packet
 from scapy.layers.dot11 import Dot11
+import time
 
 from config import Config
-import time
 
 class UnicornSensor():
 
@@ -35,6 +35,8 @@ class UnicornSensor():
 
     def event_AccessPointHeard(self, mac):
         print("AccessPoint heard: " + str(mac))
+        if mac not in ap_list:
+            ap_list.append(mac)
 
 def main():
     print("Hello World! We come in peace, bringing Soylent...")
