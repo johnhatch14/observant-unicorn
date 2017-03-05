@@ -12,14 +12,15 @@ import json
 
 class UnicornSensor():
 
+    configuration = Config()
+
     ap_list = []
     devices = {}
     blacklist = []
     whitelist = []
 
     def capture(self):
-        configuration = Config()
-        configuration.loadConfig()
+        self.configuration.loadConfig()
         # read blacklist and whitelist
         try:
             with open("blacklist", 'r') as blacklist_file:
@@ -34,8 +35,8 @@ class UnicornSensor():
                     mac = whitelist_file.readline()
         except FileNotFoundError as ex:
             print("Please create '" + ex.filename + "' file")
-        print("Listening on", configuration.interface)
-        sniff(iface = configuration.interface, prn = self.packetHandler)
+        print("Listening on", self.configuration.interface)
+        sniff(iface = self.configuration.interface, prn = self.packetHandler)
 
     def packetHandler(self, rawpacket: Packet):
 
@@ -70,9 +71,11 @@ class UnicornSensor():
         if mac not in self.ap_list:
             self.ap_list.append(mac)
 
-    def event_HeardAssociation(self, mac1, mac2):
-        # print(str(mac2), "attempting to associate with", str(mac1))
-        self.devices[mac1] = {'time': time.time(), 'associated': mac2, 'sensor_id': "1", 'ap': 0}
+    def event_HeardAssociation(self, destination, source):
+        self.devices[destination] = {'time': time.time(), 'associated': source, 'sensor_id': "1", 'ap': 0}
+        print(str(source), "attempting to associate with", str(destination)) 
+        if str(destination) == self.config.protected_network and str(source) not in self.whitelist:
+            print("Unauthorized device", str(source), "attempting to associate with", str(destination))
 
 def main():
     print("Hello World! We come in peace, bringing Soylent...")

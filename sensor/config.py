@@ -5,6 +5,7 @@ class Config():
     database_host=''
     database_user=''
     databass_pass=''
+    protected_network=''
 
     def loadConfig(self):
         # read config file
@@ -17,6 +18,7 @@ class Config():
                 self.database_host=remove_new_line(config_file.readline())
                 self.database_user=remove_new_line(config_file.readline())
                 self.databass_pass=remove_new_line(config_file.readline())
+                self.protected_network=remove_new_line(config_file.readline())
         except FileNotFoundError as error:
             print("Please create '" + error.filename + "' file")
             quit()
