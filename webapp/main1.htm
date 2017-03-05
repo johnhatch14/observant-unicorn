@@ -1,0 +1,76 @@
+<html>
+<head></head>
+<body>
+
+<p align="center"><font face="Bionic Kid Simple" size="28" color=#FFFFFF> Welcome to UNICORN Project</font></p>
+<div id="page-wrap">
+  <div id="well">
+    <a href="main.htm"><img alt="slider" id="slider" src="round.gif"  ><font face="Digital-7" size="20" color="white">Relax, its only ONES and ZEROS !</font></img> </a>
+  </div>
+</div>
+<style>
+
+#well {
+
+  -webkit-transition: opacity 0.4s ease-out;
+}
+
+* { margin: 0; padding: 0; }
+
+
+
+body  {
+    background-image: url("hack.gif");
+    background-color: #cccccc;
+}
+#page-wrap { width: 720px; margin: 0 auto; padding-top: 100px; }
+
+#well {
+	padding: 14px 20px 20px 20px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+
+	background: -moz-linear-gradient(top, #010101, #181818);
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #010101),color-stop(1, #181818));
+
+	border: 2px solid #454545;
+	overflow: hidden;
+
+	-webkit-transition: opacity 0.4s ease-out;
+}
+
+</style>
+
+<script>
+function $(id){ return document.getElementById(id); }
+
+$('slider').addEventListener('touchmove', function(event) {
+    event.preventDefault();
+    var el = event.target;
+    var touch = event.touches[0];
+    curX = touch.pageX - this.offsetLeft - 73;
+    if(curX <= 0) return;
+    if(curX > 550){
+    	$('well').style.opacity = 0;
+    }
+   	el.style.webkitTransform = 'translateX(' + curX + 'px)';
+}, false);
+
+$('slider').addEventListener('touchend', function(event) {
+    this.style.webkitTransition = '-webkit-transform 0.3s ease-in';
+    this.addEventListener( 'webkitTransitionEnd', function( event ) { this.style.webkitTransition = 'none'; }, false );
+    this.style.webkitTransform = 'translateX(0px)';
+}, false);
+</script>
+</body>
+</html>
+
+
+<div style="text-align:center">  
+    
+	<INPUT TYPE="button" Align="Center" onClick="history.go(0)" VALUE="Refresh">
+</div> 
+
+ 
+</body>
