@@ -11,10 +11,17 @@ class UnicornSensor():
 
     ap_list = []
     devices = {}
+    blacklist = []
 
     def capture(self):
         configuration = Config()
         configuration.loadConfig()
+        # read blacklist
+        with open("blacklist", 'r') as blacklist_file:
+            mac = blacklist_file.readline()
+            while mac != '':
+                blacklist.append(mac)
+                mac = blacklist_file.readline()
         print("Listening on", configuration.interface)
         sniff(iface = configuration.interface, prn = self.packetHandler)
 
@@ -32,6 +39,8 @@ class UnicornSensor():
     def event_HeardProbe(self, mac):
         print("HeardProbe from: " + str(mac))
         self.devices[str(mac)] = str(time.time())
+        if str(mac) in blacklist:
+            print("Blacklisted MAC address", str(mac), "detected!")
 
     def event_AccessPointHeard(self, mac):
         print("AccessPoint heard: " + str(mac))
