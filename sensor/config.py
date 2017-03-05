@@ -19,6 +19,7 @@ class Config():
                 self.databass_pass=remove_new_line(config_file.readline())
         except FileNotFoundError as error:
             print("Please create '" + error.filename + "' file")
+            quit()
 
 def remove_new_line(string):
     return string[0:len(string)-1]

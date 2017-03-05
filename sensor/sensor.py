@@ -51,13 +51,14 @@ class UnicornSensor():
             if pkt_fields['type'] == 0 and pkt_fields['subtype'] == (0 or 2): # Association Request
                 self.event_HeardAssociation(pkt_fields['addr1'], pkt_fields['addr2'])
 
+            with open('devices.json', 'w') as of:
+                of.write(json.dumps(self.devices))
+
     def event_HeardProbe(self, mac):
         print("HeardProbe from: " + str(mac))
         self.devices[str(mac)] = str(time.time())
         self.devices[mac] = {'time': time.time(), 'associated': None, 'sensor_id': "1", 'ap': 0}
         
-        print(devices)
-
         if str(mac) in self.blacklist:
             print("Blacklisted MAC address", str(mac), "detected!")
 
@@ -73,7 +74,13 @@ class UnicornSensor():
 
 def main():
     print("Hello World! We come in peace, bringing Soylent...")
-    UnicornSensor().capture()
+    sensor = UnicornSensor()
+    pid = os.fork()
+    if pid == 0:
+        while True:
+            time.sleep(1)
+    else:
+        sensor.capture()
 
 if __name__ == '__main__':
     main()
