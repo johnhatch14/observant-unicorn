@@ -63,7 +63,7 @@ class UnicornSensor():
 
     def event_HeardAssociation(self, destination, source):
         print(str(source), "attempting to associate with", str(destination)) 
-        if str(destination) == self.config.protected_network and str(source) not in whitelist:
+        if str(destination) == self.config.protected_network and str(source) not in self.whitelist:
             print("Unauthorized device", str(source), "attempting to associate with", str(destination))
 
 def main():
