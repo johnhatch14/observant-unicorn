@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 
-import scapy.all
+from scapy.all import sniff
 from scapy.all import Packet
 from scapy.layers.dot11 import Dot11
 
+from config import Config
 
 class UnicornSensor():
 
-    IFACE = 'wlan1' # Interface we are capturing packets on, must be in monitor mode!!!
-    AP_LIST = []
+    ap_list = []
 
     def capture(self):
-        scapy.all.sniff(iface = self.IFACE, prn = self.packetHandler)
+        configuration = Config()
+        configuration.loadConfig()
+        print("Listening on", configuration.interface)
+        sniff(iface = configuration.interface, prn = self.packetHandler)
 
     def packetHandler(self, rawpacket: Packet):
         # Prints all packets captured
@@ -31,7 +34,6 @@ class UnicornSensor():
         print("AccessPoint heard:" + str(mac))
 
 def main():
-    print("Hello World! We come in peace, bringing Soylent...")
     UnicornSensor().capture()
 
 if __name__ == '__main__':
