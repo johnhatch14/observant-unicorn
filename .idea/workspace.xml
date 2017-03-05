@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28cbac82-04e5-4924-ab17-c3102e8a41a4" name="Default" comment="Events working...">
+    <list default="true" id="28cbac82-04e5-4924-ab17-c3102e8a41a4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sensor/sensor.py" afterPath="$PROJECT_DIR$/sensor/sensor.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -416,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488681273352</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Recording timestamp&#10;">
+      <created>1488696796145</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1488696796145</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -467,7 +473,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Decoding packets... :D" />
     <MESSAGE value="Events working..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Events working..." />
+    <MESSAGE value="Recording timestamp&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Recording timestamp&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
