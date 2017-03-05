@@ -58,7 +58,9 @@ class UnicornSensor():
         print("HeardProbe from: " + str(mac))
         self.devices[str(mac)] = str(time.time())
         self.devices[mac] = {'time': time.time(), 'associated': None, 'sensor_id': "1", 'ap': 0}
-        
+        with open('macs.txt', 'a+') as f:
+            for i in self.devices:
+                f.write(i + '\n')
         if str(mac) in self.blacklist:
             print("Blacklisted MAC address", str(mac), "detected!")
 
